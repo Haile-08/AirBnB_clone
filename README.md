@@ -10,6 +10,12 @@ The ALX-Holberton B&B sums up the implementation of my four months of studies at
 - A comprehensive database to manage the backend functionalities
 - An API that provides a communication interface between the front and backend of the system.
 
+## Final product
+
+![final1](https://raw.githubusercontent.com/Haile-08/AirBnB_clone/master/images/final1.png)
+
+![final2](https://raw.githubusercontent.com/Haile-08/AirBnB_clone/master/images/final2.png)
+
 ## Background Context
 ### Welcome to the AirBnB clone project!
 
