@@ -41,7 +41,7 @@ You will always use class attributes for any object. Why not instance attributes
 
 ## Data diagram
 
-
+![datagram](https://raw.githubusercontent.com/Haile-08/AirBnB_clone/master/images/datagram.jpg)
 
 <h1 align="center">The console</h1>
 
