@@ -1,7 +1,8 @@
 #!/usr/bin/python3
-"""Importing uuid and datetime module"""
+"""Defines a module base_model"""
 import uuid
 import datetime
+import models
 
 
 class BaseModel:
@@ -9,7 +10,7 @@ class BaseModel:
         attributes/methods for other classes
     """
     def __init__(self, *args, **kwargs):
-        """Instantiation
+        """Instantation
 
         args: non-keyworded variable length argument.
         kwargs(key/value): key/value pair.
@@ -26,6 +27,8 @@ class BaseModel:
                         key = now.strftime("%A, %B %d, %Y %I:%M:%S %p")
                         setattr(self, key, value)
                     setattr(self, key, value)
+        else:
+            models.storage.new(self)
 
     def __str__(self):
         """should print: [<class name>] (<self.id>) <self.__dict__>"""
@@ -37,13 +40,14 @@ class BaseModel:
             with the current datetime
         """
         self.updated_at = datetime.datetime.now()
+        models.storage.save()
 
     def to_dict(self):
         """ returns a dictionary containing all keys/values of
             __dict__ of the instance
         """
-        _dict = self.__dict__.copy()
-        _dict['__class__'] = self.__class__.__name__
-        _dict['created_at'] = self.created_at.isoformat()
-        _dict['updated_at'] = self.updated_at.isoformat()
-        return _dict
+        r_dict = self.__dict__.copy()
+        r_dict['__class__'] = self.__class__.__name__
+        r_dict['created_at'] = self.created_at.isoformat()
+        r_dict['updated_at'] = self.updated_at.isoformat()
+        return r_dict
