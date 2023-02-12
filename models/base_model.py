@@ -2,7 +2,6 @@
 """Defines a module base_model"""
 import uuid
 import datetime
-import models
 
 
 class BaseModel:
