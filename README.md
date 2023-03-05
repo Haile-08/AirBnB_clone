@@ -45,7 +45,7 @@ You will always use class attributes for any object. Why not instance attributes
 
 <h1 align="center">The console</h1>
 
-- create your data model
+- create your data models
 - manage (create, update, destroy, etc) objects via a console / command interpreter
 - store and persist objects to a file (JSON file)
 
