@@ -8,11 +8,21 @@ class BaseModel:
 	"""Base model of all classes"""
 	
 	DATE_FORMAT = "%Y-%m-%dT%H:%M:%S.%f"
-	def __init__(self):
-	   """constructor of the class"""
-	   self.id = str(uuid.uuid4());
-	   self.created_at = datetime.now();
-	   self.updated_at = datetime.now();
+	def __init__(self, *args, **kwargs):
+	    """constructor of the class"""
+            if kwargs is not None:
+                for key, value in  kwargs.items():
+                    if key not "__class__":
+                        if key == "created_at" or key == "updated_at":
+                            self.key = datetime.datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
+                        else:
+                            self.key = value
+                    else:
+                        pass
+            else:
+	        self.id = str(uuid.uuid4());
+	       self.created_at = datetime.now();
+	       self.updated_at = datetime.now();
 
 	def save(self):
 	   """update the public instance attribute updated_at"""
