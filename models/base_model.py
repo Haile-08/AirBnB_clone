@@ -71,4 +71,3 @@ class BaseModel:
         class_id = self.id
         class_dict = self.__dict__
         return "[{}] ({}) {}".format(class_name, class_id, class_dict)
-
