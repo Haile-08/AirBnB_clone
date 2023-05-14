@@ -1,14 +1,33 @@
 #!/usr/bin/python3
-"""Define a base model class"""
+"""
+Define a base model class
+"""
 import uuid
 from datetime import datetime
 
 
 class BaseModel:
-    """Base model of all classes"""
+    """Base model of all classes
+
+    Arttributes:
+       id(str): handles unique user identity
+       created_at: assigns current datetime
+       updated_at: updates current datetime
+
+    Methods:
+       __str__: prints the class name, id, and creates dictionary
+       representations of the input values
+       save(self): updates instance arttributes with current datetime
+       to_dict(self): returns the dictionary values of the instance obj
+    """
 
     def __init__(self, *args, **kwargs):
-        """constructor of the class"""
+        """constructor of the class
+
+        args:
+            *args(args): arguments
+            **kwargs(dict): attrubute values
+        """
         DATE_FORMAT = "%Y-%m-%dT%H:%M:%S.%f"
         if kwargs:
             for key, value in kwargs.items():
@@ -26,11 +45,15 @@ class BaseModel:
             self.updated_at = datetime.utcnow()
 
     def save(self):
-        """update the public instance attribute updated_at"""
+        """
+        update the public instance attribute updated_at
+        """
         self.updated_at = datetime.utcnow()
 
     def to_dict(self):
-        """returns a dictionary containing all keys/values of __dict__"""
+        """
+        returns a dictionary containing all keys/values of __dict__
+        """
         newdict = self.__dict__.copy()
         newdict["__class__"] = self.__class__.__name__
         newdict["created_at"] = self.created_at.isoformat()
@@ -38,7 +61,9 @@ class BaseModel:
         return newdict
 
     def __str__(self):
-        """Print repsentaion of the class"""
+        """
+        Print repsentaion of the class
+        """
         class_name = self.__class__.__name__
         class_id = self.id
         class_dict = self.__dict__
