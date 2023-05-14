@@ -11,7 +11,7 @@ import io
 import sys
 import unittest
 from models.base_model import BaseModel
-
+from datetime import datetime
 
 class TestBaseModel_instantiation(unittest.TestCase):
    """Unittests for testing instantiation of the BaseModel class."""
@@ -29,11 +29,7 @@ class TestBaseModel_instantiation(unittest.TestCase):
 
    def test_None_input(self):
        with self.assertRaises(TypeError):
-          print(BaseModel(None))
-
-   def test_value_input(self):
-       with self.assertRaises(TypeError):
-          print(BaseModel(12))
+          BaseModel(id=None)
 
    def test_date(self):
        bm1 = BaseModel()
@@ -42,6 +38,22 @@ class TestBaseModel_instantiation(unittest.TestCase):
    def test_id_type(self):
        bm1 = BaseModel()
        self.assertIsInstance(bm1.id, str)
+
+   def test_args_unused(self):
+       bm = BaseModel()
+       self.assertNotIn(None, bm.__dict__.values())
+
+   def test_instantiation_with_None_kwargs(self):
+       with self.assertRaises(TypeError):
+           BaseModel(id=None, created_at=None, updated_at=None)
+
+   def test_instantiation_with_args_and_kwargs(self):
+       dt = datetime.today()
+       dt_iso = dt.isoformat()
+       bm = BaseModel("12", id="345", created_at=dt_iso, updated_at=dt_iso)
+       self.assertEqual(bm.id, "345")
+       self.assertEqual(bm.created_at, dt)
+       self.assertEqual(bm.updated_at, dt)
 
 class TestBaseModel_save(unittest.TestCase):
    """unittests for testing the save method of the basemodel class"""
