@@ -3,6 +3,7 @@
 Define a base model class
 """
 import json
+from models.base_model import BaseModel
 
 
 class FileStorage:
@@ -25,7 +26,7 @@ class FileStorage:
         """
         returns the dictionary __objects
         """
-        return type(self).__objects
+        return FileStorage.__objects
 
     def new(self, obj):
         """
@@ -33,23 +34,31 @@ class FileStorage:
         Arttributes:
             obj: all objects value  by <class name>.id
         """
-        key = "{}.{}".format(self.__class__.__name__,self.id)
-        type(self).__objects[key] = obj
+        key = "{}.{}".format(obj.__class__.__name__, obj.id)
+        FileStorage.__objects[key] = obj
 
     def save(self):
         """
         serializes __objects to the JSON file (path: __file_path)
         """
-        with open(type(self).__file_path, "w", encoding="utf-8") as f:
-            serialize = json.dumps(type(self).__objects)
-            f.write(serialize)
+        new_dict = {}
+
+        for key, value in FileStorage.__objects.items():
+            new_dict[key] = value.to_dict()
+        with open(FileStorage.__file_path, "w") as f:
+            json.dump(new_dict, f)
 
     def reload(self):
         """
         deserializes the JSON file to __objects
         """
-        with open(type(self).__file_path, "r") as f:
-            data = json.loads(f.read)
-            type(self).__objects = data
-
+        try:
+            with open(FileStorage.__file_path, "r") as f:
+                objdict = json.load(f)
+                for o in objdict.values():
+                    cls_name = o["__class__"]
+                    del o["__class__"]
+                    self.new(eval(cls_name)(**o))
+        except FileNotFoundError:
+            pass
 
