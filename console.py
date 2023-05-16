@@ -49,6 +49,7 @@ class HBNBCommand(cmd.Cmd):
         """Default behavior for cmd module when input is invalid"""
         argdict = {
                 "all": self.do_all,
+                "count": self.do_count,
         }
         match = re.search(r"\.", arg)
         if match is not None:
@@ -111,6 +112,16 @@ class HBNBCommand(cmd.Cmd):
                 storage.save()
         else:
             print("** class name missing **")
+
+    def do_count(self, arg):
+        """Retrieve the number of instances of a class"""
+        arg_list = parse(arg)
+        count = 0;
+
+        for obj in storage.all().values():
+            if obj.__class__.__name__ == arg_list[0]:
+                count += 1
+        print(count)
 
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
