@@ -51,6 +51,7 @@ class HBNBCommand(cmd.Cmd):
                 "all": self.do_all,
                 "count": self.do_count,
                 "show": self.do_show,
+                "destroy": self.do_destroy
         }
         match = re.search(r"\.", arg)
         if match is not None:
