@@ -45,7 +45,27 @@ class HBNBCommand(cmd.Cmd):
             "Place",
             "Review",
     }
+    def default(self, arg):
+        """Default behavior for cmd module when input is invalid"""
+        argdict = {
+                "all": self.do_all,
+        }
+        match = re.search(r"\.", arg)
+        if match is not None:
+            arg_list = re.split(r"\.", arg)
+            match = re.search(r"\((.*?)\)", arg_list[1])
+            if match is not None:
+                command = re.split(r"\((.*?)\)", arg_list[1])
+                if command[0] in argdict.keys():
+                    call = "{} {}".format(arg_list[0], command[0] )
+                    return argdict[command[0]](call)
+        print("*** Unknown syntax: {}".format(arg))
+        return False
+
     def do_create(self, arg):
+        """Usage: create <class>
+        Create a new class instance and print its id.
+        """
         arg_list = parse(arg)
         if arg:
             if arg_list[0] not in HBNBCommand.__classes:
@@ -57,6 +77,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_show(self, arg):
+        """Usage: show <class> <id> or <class>.show(<id>)
+        Display the string representation of a class instance of a given id.
+        """
         arg_list = parse(arg)
         objects = storage.all()
         if arg:
@@ -72,6 +95,8 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_destroy(self, arg):
+        """Usage: destroy <class> <id> or <class>.destroy(<id>)
+        Delete a class instance of a given id."""
         arg_list = parse(arg)
         objects = storage.all()
         if arg:
@@ -88,7 +113,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def do_all(self, arg):
-        arg_list = parse(arg)
+        """Usage: all or all <class> or <class>.all()
+        Display string representations of all instances of a given class.
+        If no class is specified, displays all instantiated objects."""
         if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
@@ -101,6 +128,11 @@ class HBNBCommand(cmd.Cmd):
             print(res)
 
     def do_update(self, arg):
+        """Usage: update <class> <id> <attribute_name> <attribute_value> or
+       <class>.update(<id>, <attribute_name>, <attribute_value>) or
+       <class>.update(<id>, <dictionary>)
+        Update a class instance of a given id by adding or updating
+        a given attribute key/value pair or dictionary."""
         arg_list = parse(arg)
         objects = storage.all()
         if arg:
@@ -130,6 +162,7 @@ class HBNBCommand(cmd.Cmd):
         storage.save()
 
     def do_quit(self, *args):
+        """Quit command to exit the program."""
         return True
 
     def help_quit(self):
@@ -139,6 +172,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def help_EOF(self):
+        """EOF signal to exit the program."""
         print("End of the line")
 
     def emptyline(self):
