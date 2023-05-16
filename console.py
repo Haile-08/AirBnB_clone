@@ -8,6 +8,7 @@ from shlex import split
 from models import storage
 from models.base_model import BaseModel
 from models.user import User
+from models.state import State
 
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
@@ -34,6 +35,7 @@ class HBNBCommand(cmd.Cmd):
     __classes = {
             "BaseModel",
             "User",
+            "State",
     }
     def do_create(self, arg):
         arg_list = parse(arg)
