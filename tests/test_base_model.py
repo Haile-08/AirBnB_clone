@@ -74,6 +74,10 @@ class TestBaseModel_save(unittest.TestCase):
        time2 = bm1.updated_at
        self.assertNotEqual(time1, time2)
 
+    def test_save_with_arg(self):
+        bm1 = BaseModel()
+        with self.assertRaises(TypeError):
+            bm1.save(None)
 
 class TestBaseModel_to_dict(unittest.TestCase):
   """unittestfor testing the to_dict  method the BaseModel class"""
@@ -83,6 +87,19 @@ class TestBaseModel_to_dict(unittest.TestCase):
        dict1 = bm1.__dict__
        dict2 = bm1.to_dict()
        self.assertEqual(dict1, dict2)
+
+  def test_to_dict_type(self):
+       bm1 = BaseModel()
+       self.assertTrue(dict, type(bm1.to_dict()))
+
+  def test_contrast_to_dict_dunder_dict(self):
+      bm = BaseModel()
+      self.assertNotEqual(bm.to_dict(), bm.__dict__)
+   
+  def test_to_dict_with_arg(self):
+      bm = BaseModel()
+      with self.assertRaises(TypeError):
+          bm.to_dict(None)
 
 class TestBaseModel__str__(unittest.TestCase):
    """unittests for testing the print of the BaseModel class"""
