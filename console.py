@@ -50,6 +50,7 @@ class HBNBCommand(cmd.Cmd):
         argdict = {
                 "all": self.do_all,
                 "count": self.do_count,
+                "show": self.do_show,
         }
         match = re.search(r"\.", arg)
         if match is not None:
