@@ -10,6 +10,7 @@ from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 from models.city import City
+from models.Amenity import Amenity
 
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
@@ -38,6 +39,7 @@ class HBNBCommand(cmd.Cmd):
             "User",
             "State",
             "City",
+            "Amenity",
     }
     def do_create(self, arg):
         arg_list = parse(arg)
