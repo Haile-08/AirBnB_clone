@@ -1,5 +1,8 @@
-header {
+footer {
     height: 70px;
-    background-color: #FF0000;
+    background-color: #00FF00;
+    position: fixed;
     width: 100%;
+    bottom: 0;
+    left: 0;
 }
