@@ -1,4 +1,5 @@
 .filters {
+    background-color: #FFFFFF;
     height: 70px;
     width: 100%;
     border: 1px solid #DDDDDD;
@@ -6,22 +7,6 @@
     text-align: right;
     display: flex;
     justify-content: flex-start;
-    clear: both;
-}
-
-button {
-    font-size: 18px;
-    background-color: #FF5A5F;
-    color: #FFFFFF;
-    height: 48px;
-    width: 20%;
-    border: none;
-    border-radius: 4px;
-    margin-top: 10px;
-    margin-right: 30px;
-    margin-left: auto;
-    cursor: pointer;
-    order: 2;
 }
 
 button:hover {
@@ -34,42 +19,70 @@ button:hover {
     border-right: 1px solid #DDDDDD;
     order: 0;
     text-align: left;
+    margin-left: 40px;
+    position: relative;
 }
 
 .amenities {
-    display: block;
     height: 100%;
     width: 25%;
     order: 1;
     text-align: left;
-    
+    margin-left: 40px;
 }
 
-.amenities h3, .locations h3 {
+button {
+    font-size: 18px;
+    background-color: #FF5A4F;
+    color: #FFFFFF;
+    height: 48px;
+    width: 20%;
+    border-radius: 4px;
+    border-style: none;
+    margin-top: 10px;
+    margin-right: 30px;
+    margin-left: auto;
+    order: 2;
+}
+
+.amenities h3,
+.locations h3 {
     font-weight: 600;
-    text-align: left;
-    padding-left: 30px;
+    margin: 12px 0;
 }
 
-.amenities h4, .locations h4 {
+.amenities h4,
+.locations h4 {
     font-weight: 400;
-    font-size: 14px;
-    text-align: left;
-    margin: 0px;
-    padding-left: 30px;
+    font-size: 12px;
+    margin: 0 auto;
 }
 
 .popover {
     display: none;
-    border: 1px solid #DDDDDD;
     background-color: #FAFAFA;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    width: 292px;
+    border: 1px solid #DDDDDD;
     border-radius: 4px;
-    padding: 10px;
+    margin-left: -41px;
+    margin-top: 13px;
+    box-sizing: border-box;
 }
 
-.popover ul li{
+.popover li {
     list-style-type: none;
+}
+
+.popover h2 {
+    margin-bottom: 5px;
+}
+
+.popover ul {
+    margin-top: 5px;
+}
+
+.locations .popover ul {
+    padding-left: 20px;
 }
 
 .locations:hover .popover {
@@ -79,5 +92,4 @@ button:hover {
 
 .amenities:hover .popover {
     display: block;
-    padding-left: 18px;
 }
